@@ -5,7 +5,7 @@ After=network-online.target
 [Service]
 Type=simple
 # Runs as a dedicated non-root user: `claude -p` in watch-approved.sh needs
-# --allow-dangerously-skip-permissions to edit files non-interactively, and
+# --dangerously-skip-permissions to edit files non-interactively, and
 # Claude Code refuses that flag when running as root (see docs/setup.md).
 # All three units share this user so `claude auth`/`gh auth` only need
 # doing once. Create the user and its vault ACL before enabling this unit.

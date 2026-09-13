@@ -35,7 +35,7 @@ roughly in the order they'll bite.
 - **Author identity for PRs.** Decide whether `gh` authenticates as
   you or a dedicated bot account before this touches anything beyond
   personal/toy repos.
-- **The implementation step runs with `--allow-dangerously-skip-permissions`.**
+- **The implementation step runs with `--dangerously-skip-permissions`.**
   `watch-approved.sh` invokes `claude -p` non-interactively — no TTY exists
   to answer a permission prompt, so without this flag the first file edit
   just stalls forever asking for approval nobody can give. This is

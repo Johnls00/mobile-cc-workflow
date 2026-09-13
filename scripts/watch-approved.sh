@@ -108,7 +108,7 @@ build/lint/test suite.
 
 Plan:
 $(cat "$plan_file")" \
-      --allow-dangerously-skip-permissions \
+      --dangerously-skip-permissions \
       >> "$VAULT/logs/$task_name.log" 2>&1 &&
     git add -A &&
     { git commit -m "Implement: $task_name" || echo "[watch-approved] Nothing to commit"; } &&

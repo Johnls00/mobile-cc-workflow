@@ -30,7 +30,7 @@ useradd -m -s /bin/bash mcw
 ```
 
 This isn't optional cosmetics: `watch-approved.sh`'s implementation step
-runs `claude -p --allow-dangerously-skip-permissions` (needed because
+runs `claude -p --dangerously-skip-permissions` (needed because
 there's no TTY to answer a permission-to-edit prompt non-interactively),
 and **Claude Code refuses that flag outright when running as root** —
 `--dangerously-skip-permissions cannot be used with root/sudo privileges
