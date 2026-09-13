@@ -3,11 +3,11 @@ Description=Sweep for stale/crashed tasks
 
 [Service]
 Type=oneshot
-# No User= is set, so this runs as root without systemd populating $HOME —
-# git/gh need it to find ~/.gitconfig and ~/.config/gh (see docs/setup.md).
-Environment=HOME=/root
+# Same non-root user as the other two units — see watch-approved.service.
+User=mcw
+Environment=HOME=/home/mcw
 Environment=VAULT_PATH=/vault
-Environment=PROJECTS_DIR=/root/projects
+Environment=PROJECTS_DIR=/home/mcw/projects
 # EDIT before starting: set your own ntfy topic (see docs/notifications.md)
 Environment=NTFY_TOPIC=your-topic-here
 Environment=STALE_MINUTES=60

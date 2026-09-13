@@ -47,6 +47,16 @@ roughly in the order they'll bite.
   (bounded to whatever `git`/`gh`/the project's own tooling can do, not
   arbitrary secrets on the box). Revisit if the scoped-`--allowedTools`
   alternative ever becomes worth the extra maintenance.
+- **Everything runs as a dedicated non-root user (`mcw`), not root.**
+  Discovered the hard way: Claude Code hard-refuses
+  `--dangerously-skip-permissions` when running as root or via sudo — it's
+  not just a warning, the process exits immediately. Since the
+  implementation step depends on that flag (see above), root was never
+  going to work here regardless of any other tradeoff. This means
+  `claude auth`, `gh auth`, and all three systemd units' `User=` must
+  agree on the same non-root user, and that user needs its own ACL grant
+  on the vault mount (root's ownership of a Syncthing-managed mount
+  doesn't extend to it) — see docs/setup.md steps 2-3.
 
 ## Sync-layer
 

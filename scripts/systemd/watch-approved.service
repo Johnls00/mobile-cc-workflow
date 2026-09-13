@@ -4,11 +4,15 @@ After=network-online.target
 
 [Service]
 Type=simple
-# No User= is set, so this runs as root without systemd populating $HOME —
-# git/gh need it to find ~/.gitconfig and ~/.config/gh (see docs/setup.md).
-Environment=HOME=/root
+# Runs as a dedicated non-root user: `claude -p` below needs
+# --allow-dangerously-skip-permissions to edit files non-interactively, and
+# Claude Code refuses that flag when running as root (see docs/setup.md).
+# All three units share this user so `claude auth`/`gh auth` only need
+# doing once. Create the user and its vault ACL before enabling this unit.
+User=mcw
+Environment=HOME=/home/mcw
 Environment=VAULT_PATH=/vault
-Environment=PROJECTS_DIR=/root/projects
+Environment=PROJECTS_DIR=/home/mcw/projects
 # EDIT before starting: set your own ntfy topic (see docs/notifications.md)
 Environment=NTFY_TOPIC=your-topic-here
 ExecStart=/usr/local/bin/watch-approved.sh
