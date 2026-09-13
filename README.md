@@ -9,17 +9,17 @@ back — all without opening a laptop.
 ```
  Phone (Obsidian)          Syncthing            Proxmox LXC
  ┌─────────────┐        ┌───────────┐        ┌────────────────────┐
- │ vault/       │◄──────►│ sync      │◄──────►│ vault/ (mounted)   │
- │  Backlog/    │        └───────────┘        │                    │
- │  tasks/      │                             │ watch-todo.sh      │
- │  plans/      │                             │   -> claude -p     │
- │  logs/       │                             │   -> plans/*.md    │
+ │ vault/      │◄──────►│ sync      │◄──────►│ vault/ (mounted)   │
+ │  Backlog/   │        └───────────┘        │                    │
+ │  tasks/     │                             │ watch-todo.sh      │
+ │  plans/     │                             │   -> claude -p     │
+ │  logs/      │                             │   -> plans/*.md    │
  └─────────────┘                             │                    │
-                                              │ watch-approved.sh  │
-                                              │   -> git branch    │
-                                              │   -> claude -p     │
-                                              │   -> gh pr create  │
-                                              └────────────────────┘
+                                             │ watch-approved.sh  │
+                                             │   -> git branch    │
+                                             │   -> claude -p     │
+                                             │   -> gh pr create  │
+                                             └────────────────────┘
 ```
 
 No local model inference happens on the LXC. Claude Code calls the
