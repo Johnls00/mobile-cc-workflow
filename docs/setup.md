@@ -85,15 +85,30 @@ is a file-watcher calling `claude -p` non-interactively, so hooks add
 complexity without buying anything here.
 
 Verify the commands this system depends on actually exist before
-wiring up the watchers — a missing skill/command fails silently here
-(the watcher just logs a failed `claude -p` run and notifies "planning
-failed" / "implementation failed" with no more specific reason):
+wiring up the watchers. This matters more than it sounds: an unknown
+slash command doesn't make `claude -p` fail — it exits 0 and just
+prints `Unknown command: /whatever` as if that were the plan, so
+`watch-todo.sh` writes that one line to `plans/<name>.plan.md` and
+notifies "Plan ready" as if planning succeeded. Nothing here surfaces
+as an error; the wrong output just quietly becomes the plan.
 
 ```bash
-claude -p "/ecc:plan" --help 2>&1 | head -20   # or: claude /help, and confirm
-                                                 # /ecc:plan, tdd-workflow, and
-                                                 # /code-review are listed
+claude -p "/plan
+Task note:
+---
+repo: some-test-repo
+base: main
+---
+A one-line placeholder task. Write the plan only, do not implement." \
+  | head -5
 ```
+
+If this prints `Unknown command: ...` instead of the start of a real
+plan, the command name is wrong — check `~/.claude/commands/` for what
+actually got installed (`claude plugin list` may report "No plugins
+installed" even when ECC's commands work fine as flat, unnamespaced
+slash commands; don't assume a `<plugin>:<command>` prefix without
+checking).
 
 ## 6. Install the watcher scripts
 

@@ -37,7 +37,7 @@ see [docs/resource-notes.md](docs/resource-notes.md).
    to trigger. This is the trigger boundary.
 3. `watch-todo.sh` picks up any `*-ready.md` file, moves it to
    `tasks/in-progress/`, runs
-   `/ecc:plan` against it, and writes the result to `plans/`. **It stops
+   `/plan` against it, and writes the result to `plans/`. **It stops
    there.** No implementation happens yet.
 4. You review the plan in Obsidian on your phone.
 5. **Approve** by renaming the plan file to `approved-*.md` (or moving

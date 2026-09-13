@@ -52,7 +52,7 @@ something, only a rename.
 2. Waits for a quiet period (no writes for ~8s) to avoid reading a
    file mid-Syncthing-sync
 3. Strips the `-ready` suffix and moves it to `tasks/in-progress/`
-4. Runs `claude -p` with `/ecc:plan` against the note's content
+4. Runs `claude -p` with `/plan` against the note's content
 5. Writes the plan to `plans/<task-name>.plan.md`
 6. Stops. Does not implement.
 

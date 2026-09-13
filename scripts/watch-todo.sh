@@ -73,7 +73,7 @@ process_task() {
   echo "[watch-todo] Planning: $name (repo=$repo base=$base)"
 
   local plan_file="$PLANS_DIR/$name.plan.md"
-  if ! claude -p "/ecc:plan
+  if ! claude -p "/plan
 
 Task note:
 $(cat "$inprogress_file")
