@@ -1,0 +1,16 @@
+[Unit]
+Description=Watch vault plans for approved-*.plan.md and implement via PR
+After=network-online.target
+
+[Service]
+Type=simple
+Environment=VAULT_PATH=/vault
+Environment=PROJECTS_DIR=/root/projects
+# EDIT before starting: set your own ntfy topic (see docs/notifications.md)
+Environment=NTFY_TOPIC=your-topic-here
+ExecStart=/usr/local/bin/watch-approved.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

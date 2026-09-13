@@ -1,0 +1,11 @@
+[Unit]
+Description=Sweep for stale/crashed tasks
+
+[Service]
+Type=oneshot
+Environment=VAULT_PATH=/vault
+Environment=PROJECTS_DIR=/root/projects
+# EDIT before starting: set your own ntfy topic (see docs/notifications.md)
+Environment=NTFY_TOPIC=your-topic-here
+Environment=STALE_MINUTES=60
+ExecStart=/usr/local/bin/sweep-stale.sh

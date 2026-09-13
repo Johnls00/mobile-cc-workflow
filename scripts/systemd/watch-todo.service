@@ -1,0 +1,15 @@
+[Unit]
+Description=Watch vault tasks/to-do and plan new tasks
+After=network-online.target
+
+[Service]
+Type=simple
+Environment=VAULT_PATH=/vault
+# EDIT before starting: set your own ntfy topic (see docs/notifications.md)
+Environment=NTFY_TOPIC=your-topic-here
+ExecStart=/usr/local/bin/watch-todo.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
