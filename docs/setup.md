@@ -62,9 +62,18 @@ headless box.
 ```bash
 apt install -y gh
 gh auth login
+gh auth setup-git
 git config --global user.name  "your-name"
 git config --global user.email "your-email"
 ```
+
+`gh auth login` alone does **not** configure git's credential helper —
+`watch-approved.sh` calls raw `git fetch`/`git push` (not `gh`'s own
+wrappers), and without `gh auth setup-git` those fail with `fatal: could
+not read Username for 'https://github.com'` the moment they hit a private
+repo, non-interactively, with nothing to prompt. Confirm it worked:
+`git config --global --list | grep credential` should show
+`credential.https://github.com.helper=!/usr/bin/gh auth git-credential`.
 
 The account/token `gh` authenticates as will be the author of every
 PR this system opens. Consider whether you want a dedicated bot
