@@ -4,6 +4,9 @@ After=network-online.target
 
 [Service]
 Type=simple
+# No User= is set, so this runs as root without systemd populating $HOME —
+# git/gh need it to find ~/.gitconfig and ~/.config/gh (see docs/setup.md).
+Environment=HOME=/root
 Environment=VAULT_PATH=/vault
 # EDIT before starting: set your own ntfy topic (see docs/notifications.md)
 Environment=NTFY_TOPIC=your-topic-here

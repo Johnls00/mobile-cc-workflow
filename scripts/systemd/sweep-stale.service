@@ -3,6 +3,9 @@ Description=Sweep for stale/crashed tasks
 
 [Service]
 Type=oneshot
+# No User= is set, so this runs as root without systemd populating $HOME —
+# git/gh need it to find ~/.gitconfig and ~/.config/gh (see docs/setup.md).
+Environment=HOME=/root
 Environment=VAULT_PATH=/vault
 Environment=PROJECTS_DIR=/root/projects
 # EDIT before starting: set your own ntfy topic (see docs/notifications.md)
