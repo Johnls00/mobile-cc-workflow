@@ -35,6 +35,18 @@ roughly in the order they'll bite.
 - **Author identity for PRs.** Decide whether `gh` authenticates as
   you or a dedicated bot account before this touches anything beyond
   personal/toy repos.
+- **The implementation step runs with `--allow-dangerously-skip-permissions`.**
+  `watch-approved.sh` invokes `claude -p` non-interactively — no TTY exists
+  to answer a permission prompt, so without this flag the first file edit
+  just stalls forever asking for approval nobody can give. This is
+  deliberate, not an oversight: it's only reachable after the human
+  approval gate above, it runs on an isolated branch, and it never pushes
+  to `base`. Anthropic's own flag description warns it's "recommended only
+  for sandboxes with no internet access" — this LXC does have internet
+  access, so a badly-reasoned or compromised run has real network reach
+  (bounded to whatever `git`/`gh`/the project's own tooling can do, not
+  arbitrary secrets on the box). Revisit if the scoped-`--allowedTools`
+  alternative ever becomes worth the extra maintenance.
 
 ## Sync-layer
 
